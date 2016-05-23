@@ -1,5 +1,6 @@
 <template>
-<h1> coucou </h1>
+
+    <a class="navbar-item" href="#/test">Tutoriel</a>
 </template>
 
 <script>

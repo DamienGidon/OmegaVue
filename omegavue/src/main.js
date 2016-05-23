@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import App from './App.vue'
 import Hello from './components/Hello.vue'
 import Start from './components/Start.vue'
+import Modal from './components/Modal.vue'
+import Test from './components/test.vue'
 
 // install router
 Vue.use(Router)
@@ -16,6 +18,12 @@ router.map({
   },
   '/start': {
     component: Start
+  },
+  '/test': {
+    component: Test
+  },
+  '/modal': {
+    component: Modal
   }
 })
 

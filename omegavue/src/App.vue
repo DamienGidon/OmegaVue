@@ -1,47 +1,49 @@
 <template>
-  
-  
-  <h1> coucou App</h1>
-  <router-view></router-view>
-  
-  
+<div id="navbar">
+  <a class="navbar-brand" href="index.html">Ω</a>
+  <div class="navbar-item">
+    <a class="navbar-item" href="#/modal">Commencer</a>
+    <a class="navbar-item" href="#/start">Tutoriel</a>
+  </div>
+</div>
+<router-view></router-view>
 </template>
 
-
 <style>
-html {
-  height: 100%;
+#navbar {
+  background: transparent;
+  height: 50px;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  color: #2c3e50;
-  margin-top: 100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
+.navbar-brand {
+  font-family: calibri;
+  float: left;
+  height: 50px;
+  font-size: 35px;
+  padding-left: 30px;
+  padding-top: 10px;
+  line-height: 20px;
   text-decoration: none;
 }
 
-.logo {
-  width: 200px;
-  height: 200px
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: grey;
 }
 
-.tableau {
-  margin-top: 100px;
-  width: 500px;
-  height: 200px
+.navbar-item {
+  font-family: calibri;
+  font-size: 17px;
+  text-align: right;
+  padding-top: 12px;
+  margin-right: 25px;
+  background: ;
+  text-decoration: none;
+  color: grey;
+}
 
+.navbar-item:hover,
+.navbar-item:focus {
+  color: black;
 }
 </style>
