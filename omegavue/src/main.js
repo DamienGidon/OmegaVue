@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from './App.vue'
-import Hello from './components/Hello.vue'
+import App from './App2.vue'
+import Hello from './components/Hello2.vue'
+import Home from './components/Home.vue'
 import Start from './components/Start.vue'
 import Modal from './components/Modal.vue'
-import Test from './components/test.vue'
+import Test from './components/test2.vue'
 
 // install router
 Vue.use(Router)
-
+Vue.use(require('vue-resource'))
 // routing
 var router = new Router()
 
@@ -19,11 +20,14 @@ router.map({
   '/start': {
     component: Start
   },
-  '/test': {
+  '/test/:id': {
     component: Test
   },
   '/modal': {
     component: Modal
+  },
+  '/home': {
+    component: Home
   }
 })
 

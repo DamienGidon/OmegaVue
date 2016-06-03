@@ -1,7 +1,8 @@
 <template>
 <div id="navbar">
   <a class="navbar-brand" href="index.html">Ω</a>
-  <div class="navbar-item">
+  <a class="navbar-omega" href="index.html">Omega</a>
+  <div class="navbar-items">
     <a class="navbar-item" href="#/modal">Commencer</a>
     <a class="navbar-item" href="#/start">Tutoriel</a>
   </div>
@@ -13,6 +14,8 @@
 #navbar {
   background: transparent;
   height: 50px;
+  display: block;
+  border-bottom: 1px solid 2px;
 }
 
 .navbar-brand {
@@ -20,7 +23,7 @@
   float: left;
   height: 50px;
   font-size: 35px;
-  padding-left: 30px;
+  padding-left: 22%;
   padding-top: 10px;
   line-height: 20px;
   text-decoration: none;
@@ -31,15 +34,32 @@
   color: grey;
 }
 
+.navbar-items {
+  padding-right: 20%;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
 .navbar-item {
   font-family: calibri;
   font-size: 17px;
   text-align: right;
-  padding-top: 12px;
-  margin-right: 25px;
-  background: ;
+  margin-left: 20px;
   text-decoration: none;
   color: grey;
+}
+
+.navbar-omega {
+  font-family: 'marguerite';
+  src: url('assets/marguerite.ttf');
+  float: left;
+  color: white;
+  margin-left: 44%;
+  height: 50px;
+  font-size: 35px;
+  padding-top: 15px;
+  line-height: 20px;
+  text-decoration: none;
 }
 
 .navbar-item:hover,
