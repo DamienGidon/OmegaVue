@@ -12,7 +12,7 @@
                </div>
             </div>
           </span>
-        <span>
+        </span>
       </div>
 
       <div class="moodsPanel">
@@ -45,9 +45,6 @@
                   </span>
                 </div>
               </span>
-              
-            </div>
-            <div class="overlay">
             </div>
           </li>
         </ul>
@@ -89,8 +86,8 @@
         </span>
       </div>
     </div>
-  
- </body>
+
+  </body>
 </html>
 </template>
 
@@ -161,13 +158,10 @@
 </script>
 
 <style>
-div {
-  /*border: 1px solid black;*/
-}
-
 html {
   height: 100%;
 }
+
 body {
   height: 100%;
   margin: 0px;
@@ -202,19 +196,23 @@ body {
 .col-12 {width: 100%;}
 
 #leftContent {
-  background: #1B1B1B;
+  background: white;
   height: 100%;
+  float: left;
 }
 
 #middleContent {
   height: 100%;
-  background: #1E1E1E;
+  float: left;
+  background: white; 
+  padding: 2%;
 }
 
 .eventPanel {
   height: 10%;
   margin-bottom: 1%;
   min-height: 100px;
+  padding: 1%;
 }
 
 .eventWrapper {
@@ -241,7 +239,7 @@ body {
   text-align: center;
   position: absolute;
   top: 0;
-  padding: 5%;
+  padding: 2%;
   z-index: 2;
   overflow: hidden;
   white-space: nowrap;
@@ -282,7 +280,8 @@ body {
 }
 
 .playlistsPanel {
-  height: 56%;
+  padding-left: 1%;
+  height: 54%;
   margin-bottom: 1%;
   text-align: center;
   font-family: "Montserrat-UltraLight";
