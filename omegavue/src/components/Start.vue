@@ -1,41 +1,45 @@
 <template>
-<h2>Events</h2>
-<div  class="globalevent">
-   <div class="events">
-  <div class="listevent" v-for="event in events">
-      <div class="content-event marginRight" >
-      <a href="#/test/{{event.id}}"><h3>{{ event.title }}</h3></a>
-      <div class="content-event-image"> <img class="imgevent" v-bind:src="event.img" /></a> </div>
+<div class="back">
+<hr class="hr1left">
+<label class="eventLab" for="switch-2" >Events</label>
+<label class="groupLab" for="switch-1">Groups</label><hr class="hr1right">
+<input value="checked" id="switch-1" type="radio" name="tog">
+<div><div class="globalgroup">
+  <div class="listgroup" v-for="group in groups">
+      <div class="content-group" >
+      <div class="content-group-image"> 
+        <img class="imggroup" v-bind:src="group.img" /> </div>
+          <a class="aGroup" href="#/mix/{{group.id}}">{{ group.title }}<br>{{group.start_time}}</a>
     </div>
   </div>
-  </div>
-</div>
-<br><br>
+</div></div>
 
-	 <h2>Groups</h2>
-<div class="globalgroup">
-	 <div class="groups">
-	<div class="listgroup" v-for="group in groups">
-  		<div class="content-group marginRight" >
-    	<a href="#/test/{{group.id}}"><h3>{{ group.title }}</h3></a>
-    	<div class="content-group-image"> <img class="imggroup" v-bind:src="group.img" /></a> </div>
-  	</div>
+<input id="switch-2" type="radio" name="tog" checked="checked">
+<div><div class="globalevent">
+  <div class="listevent" v-for="event in events">
+      <div class="content-event " >
+      <div class="content-event-image">
+      <img class="imgevent"  v-bind:src="event.img" />
+      </div>
+      <a class="aEvent" href="#/mix/{{event.id}}">{{ event.title }}</a>
+    </div>
   </div>
-  </div>
-</div>
-<br><br>
-	 <h2>Playlists</h2>
+</div> </div>
+
+
+
+<hr class="hr2left"><label class="playlistLab">Playlists</label><hr class="hr2right">
 <div class="globalplaylist">
-	 <div class="startPlaylists">
 	<div class="listplaylist" v-for="playlist in playlists">
-  		<div class="content-playlist marginRight" >
-    	<a href="#/test/{{playlist.id}}"><h3>{{ playlist.name }}</h3></a>
+  		<div class="content-playlist " >
     	<div class="content-playlist-image"> <img class="imgplaylist" v-bind:src="playlist.image" /></div>
+            <a class="aPlaylist" href="#/mix/{{playlist.id}}">{{ playlist.name }}</a>
   	</div>
-  </div>
   </div>
 </div>
 
+
+</div>
 </template>
 
 <script>
@@ -52,21 +56,21 @@ export default {
   },
   methods: {
     loadEvents: function () {
-      this.$http.get('https://api.myjson.com/bins/4wzd2', function (data, status, request) {
+      this.$http.get('https://api.myjson.com/bins/3a8sc', function (data, status, request) {
         if (status === 200) {
           this.events = data
         }
       })
     },
     loadGroups: function () {
-      this.$http.get('https://api.myjson.com/bins/1go1y', function (data, status, request) {
+      this.$http.get('https://api.myjson.com/bins/qn6r', function (data, status, request) {
         if (status === 200) {
           this.groups = data
         }
       })
     },
     loadPlaylists: function () {
-      this.$http.get('https://api.myjson.com/bins/2re5i', function (data, status, request) {
+      this.$http.get('https://api.myjson.com/bins/3bjxk', function (data, status, request) {
         if (status === 200) {
           this.playlists = data
         }
@@ -78,164 +82,258 @@ export default {
 </script>
 
 <style>
-h1{
-	font-size:30px;
-	color:grey;
-	text-align: ;
-	font-family: calibri;
+.hr1left {
+ width: 30%;
+float: left;
+position: relative;
+margin-left: 10.4%;
+margin-right: 1.2%;
+margin-top: 1%;
+}
+.hr1right {
+ width: 30%;
+margin-top: 1%;
+ margin-right: 9.4%;
+float: right;
+position: relative;
+}
+.hr2left {
+ width: 32%;
+float: left;
+position: relative;
+margin-left: 10.4%;
+}
+.hr2right {
+ width: 32%;
+ margin-right: 9.4%;
+float: right;
+position: relative;
+}
+.back {
+  padding-top: 2%;
+  background-color: #F8F8F8;
+  position: absolute;
+}
+[id^=switch],
+[id^=switch] + *{
+  display:none;
 }
 
-h3{
-  font-size:30px;
-  color:grey;
-  padding-left: 95px;
-  text-align: center;
-  font-family: calibri;
+[id^=switch]:checked + *{
+  display:block;
 }
+
+.eventLab {
+
+background: #F8F8F8 ;
+  font-family: Montserrat-UltraLight;
+  color: #000000;
+  font-size: 20px;
+  padding: 0px 0px 5px 0px;
+  text-decoration: none;
+  margin-left: 2%;
+  margin-top: -0.2%;
+  position: absolute;
+  align-content: center;
+
+}
+.eventLab:hover {
+  background-color: #E8E8E8;
+}
+.groupLab:hover {
+  background-color: #E8E8E8;
+}
+.playlistLab {
+
+background-color:#F8F8F8;
+  font-family: Montserrat-UltraLight;
+  font-size: 20px;
+  padding: 5px 1% 5px 2%;
+  text-decoration: none;
+  margin-left: 3%;
+  margin-top: -0.8%;
+  border-color: transparent;
+  position:relative;
+}
+.groupLab {
+background:#F8F8F8;
+  color: #000000;
+    font-family: Montserrat-UltraLight;
+  font-size: 20px;
+  padding: 0px 0px 5px 0px;
+  text-decoration: none;
+  position: absolute;
+  margin-left: 10%;
+    margin-top: -0.2%;
+}
+
+/*Event*/
 .globalevent{
-  width:90%;
-  height:210px;
-  margin-left: 5%;
-  overflow-x: scroll;
+  width:82%;
+  max-height: 205px;
+  margin-bottom: 1%;
+  margin-left: 9%;
+  overflow-x: hidden;
   overflow-y: hidden;
-  white-space: nowrap;
-  background-color: #d0d0c5;
+  background-color: #F8F8F8 ; 
+  position: relative;
+   -webkit-transition: max-height 2s; 
+    transition: max-height 2s;
+        padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
 }
-.events{
-  vertical-align: middle;
-}
-.globalgroup{
-  width:90%;
-  height:210px;
-  margin-left: 5%;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  background-color: #d0d0c5;
+.globalevent:hover{
 
-}
-.groups{
-  vertical-align: middle;
-}
-.globalplaylist{
-	width:90%;
-  height:210px;
-  margin-left: 5%;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  background-color: #d0d0c5;
-}
-.startPlaylists{
-  display: inline-block;
-	vertical-align: middle;
+max-height: 10000px;
 }
 
 .listevent {
-	display: inline-block;
-  vertical-align: middle;
-  margin-right: 3%;
-  margin-left: -4%;
-}
-.listgroup {
-	
+  margin-left: 0.5%;
   display: inline-block;
-  vertical-align: middle;
-  margin-right: 3%;
-  margin-left: -4%;
+  width: 150px;
+  height: 220px;
+  border-style:none;
+  margin-bottom:-2.3%;
 
 }
-.listplaylist {
-	
-  display: inline-block;
-  vertical-align: middle;
+
+.aEvent {
+  height: 35px;
+  width: 150px;
+  font-family: Montserrat-UltraLight ;
+  color:black;  
+  font-size: 11px;
+  text-align: left;
+  padding-top: 0px;
+  padding-left: 20px;
+  background-color: #E8E8E8 ;
+  margin-top: 0%;
+ text-decoration: none;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+
+
 }
 
-.content-event h3 {
-  font-size:20px;
-  color:#41403b;
-  text-align: center;
-}
-.content-group h3 {
-  font-size:20px;
-  color:#41403b;
-  text-align: center;
-}
-.content-playlist h3 {
-  font-size:20px;
-  color:#41403b;
-  padding-left: 50px;
-}
-.content-event-image {
-
-	width:320px;
-	height:120px;
-	margin-left:90px;
-	padding-top:0px;
-	background:#d0d0c5;
-}
-.content-group-image {
-
-  width:320px;
-  height:120px;
-  margin-left:90px;
-  padding-top:0px;
-  background:#d0d0c5;
-}
-.content-playlist-image {
-
-  width:120px;
-  height:120px;
-  margin-left:70px;
-  padding-top:0px;
-  background:#d0d0c5;
-}
 .imgevent {
-
-	width:300px;
-	height:100px;
-	padding-left:10px;
-	padding-top:8px;
+  width:150px;
+  height:150px;
 }
+/*Group*/
+.globalgroup{
+  width:82%;
+  max-height: 205px;
+  margin-bottom: 1%;
+  margin-left: 9%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #F8F8F8; ;
+  position: relative;
+   -webkit-transition: max-height 2s; 
+    transition: max-height 2s;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+.globalgroup:hover{
+
+max-height: 10000px;
+}
+
+.listgroup {
+  margin-left: 1%;
+  padding-top: 0%;
+  margin-left: 0.5%;
+  display: inline-block;
+  width: 150px;
+  height: 220px;
+  border-style:none;
+  margin-bottom: -2.6%;
+}
+.aGroup {
+  height: 35px;
+  width: 150px;
+  font-family: Montserrat-UltraLight ;
+  color:black;  
+  font-size: 11px;
+  text-align: left;
+  padding-top: 0px;
+  padding-left: 20px;
+  background-color: #E8E8E8 ;
+  margin-top: 0%;
+ text-decoration: none;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+
+
+
+}
+
 .imggroup {
 
-  width:300px;
-  height:100px;
-  padding-left:10px;
-  padding-top:8px;
+  width:150px;
+  height:150px;
 }
+
+/*Playlist*/
+.globalplaylist{
+  width:82%;
+  max-height:400px;
+  margin-left: 9%;
+  margin-top: 0%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #F8F8F8;
+  position: relative;
+  margin-bottom: 5%;
+  -webkit-transition: max-height 2s; 
+  transition: max-height 2s;
+      padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+.globalplaylist:hover{
+max-height: 10000px;
+}
+.listplaylist {
+  padding-top: 0%;
+  margin-left: 0.5%;
+  display: inline-block;
+  width: 150px;
+  height: 200px;
+  border-style:none;
+  margin-bottom: -0.5%;
+
+}
+.aPlaylist {
+  height: 35px;
+  width: 150px;
+  font-family: Montserrat-UltraLight ;
+  color:black;  
+  font-size: 11px;
+  text-align: left;
+  padding-top: 0px;
+  padding-left: 20px;
+  background-color: #E8E8E8 ;
+  margin-top: 0%;
+ text-decoration: none;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+
+}
+
+
+
 .imgplaylist {
 
-  width:100px;
-  height:100px;
-  padding-left:10px;
-  padding-top:8px;
-
-}
-.content-event p {
-	line-height:20px;
-	margin-top:10px;
-	text-align:left;
-}
-.content-group p {
-  line-height:20px;
-  margin-top:10px;
-  text-align:left;
-}
-.content-playlist p {
-  line-height:20px;
-  margin-top:10px;
-  text-align:left;
-}
-h2{
-	font-family: calibri;
-	font-size:25px;
-	color:#41403b;
-	padding-top: 2px;
-	margin-left: 160px;
-	color:grey;
-}
+  width:150px;
+  height:150px;
 
 
 
+}
 </style>

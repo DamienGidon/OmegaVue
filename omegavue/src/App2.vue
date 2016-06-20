@@ -1,12 +1,4 @@
 <template>
-<div id="navbar">
-  <img class="logo" src="assets/OmegaGreyLogo.png">
-  <a class="navbar-brand" href="index.html">OMEGA</a>
-  <span id="navbar-items">
-    <a class="navbar-item" href="#/start">MENU</a>
-    <a class="navbar-item" href="#/hello2">LOGIN</a>
-  </span>
-</div>
 <router-view></router-view>
 </template>
 
@@ -25,27 +17,32 @@
 
 body {
   margin: 0px;
+    background-color: #F8F8F8 ;
+
 }
 
 #navbar {
-  height: 125px;
+  height: 70px;
   padding-left: 20%;
-  padding-right: 20%;
+  padding-right: 10%;
+  background-color: #F8F8F8 ;
 }
 
 .navbar-brand {
   font-family: 'Montserrat-UltraLight';
   font-size: 24px;
   color: grey;
-  margin-top: 70px;
+  margin-top: 2.6%;
   float: left;
   text-decoration: none;
+  margin-left: -60px;
 }
 
 .logo {
   width: 30px;
-  margin-top: 70px;
-  padding-right: 5px;
+  margin-top: 2.6%;
+  padding-right: 10px;
+  margin-left: -100px;
   float: left;
 }
 
@@ -56,7 +53,7 @@ body {
 
 .navbar-items, a {
   text-align: right;
-  margin-top: 75px;
+  margin-top: 35px;
   float: right;
   padding-right: 20px;
 }

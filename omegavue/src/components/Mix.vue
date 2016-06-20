@@ -167,7 +167,6 @@ div {
 
 html {
   height: 100%;
-  overflow: hidden;
 }
 body {
   height: 100%;
@@ -184,10 +183,6 @@ body {
     clear: both;
     display: block;
 }
-
-div {
-}
-
 .value {
   color: #58ACFA;
   font-weight: bold;

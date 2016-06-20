@@ -12,7 +12,7 @@
 
 <style>
 #navbar {
-  background: transparent;
+  background: #F5F5F5;
   height: 50px;
   display: block;
   border-bottom: 1px solid 2px;

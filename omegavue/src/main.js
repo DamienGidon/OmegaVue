@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from './App2.vue'
-import Hello from './components/Hello2.vue'
-import Home from './components/Home.vue'
+import StreamCo from './components/StreamCo.vue'
 import Start from './components/Start.vue'
-import Modal from './components/Modal.vue'
-import Test from './components/test2.vue'
-
+import Fb from './components/Fb.vue'
+import Mix from './components/Mix.vue'
 // install router
 Vue.use(Router)
 Vue.use(require('vue-resource'))
@@ -14,20 +12,17 @@ Vue.use(require('vue-resource'))
 var router = new Router()
 
 router.map({
-  '/hello': {
-    component: Hello
+  '/streamCo': {
+    component: StreamCo
   },
   '/start': {
     component: Start
   },
-  '/test/:id': {
-    component: Test
+  '/fb': {
+    component: Fb
   },
-  '/modal': {
-    component: Modal
-  },
-  '/home': {
-    component: Home
+  '/mix/:id': {
+    component: Mix
   }
 })
 
@@ -36,7 +31,7 @@ router.beforeEach(function () {
 })
 
 router.redirect({
-  '*': '/hello'
+  '*': '/streamCo'
 })
 
 router.start(App, '#app')
