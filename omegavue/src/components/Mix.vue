@@ -4,17 +4,26 @@
     <div class="col-3" id="leftContent">
       <div class="eventPanel">
         <span v-for="event in events">
-          <span v-if="event.id == 3">
+          <span v-if="event.Id == caca">
             <div class="eventWrapper">
-              <img v-bind:src="event.img">
+              <img v-bind:src="event.Cover">
               <div class="eventText">
-                {{event.title}}
+                {{event.Name}}
+               </div>
+            </div>
+          </span>
+        </span>
+        <span v-for="group in groups">
+          <span v-if="group.Id == caca">
+            <div class="eventWrapper">
+              <img v-bind:src="group.Cover">
+              <div class="eventText">
+                {{group.Name}}
                </div>
             </div>
           </span>
         </span>
       </div>
-
       <div class="moodsPanel">
         <span class="moodsText"><span class="value">{{moods.length}}</span> Ambiances</span>
         <ul class="moodUl">
@@ -52,7 +61,7 @@
 
       <!-- <div class="mixesPanel"> -->
       <div class="moodsPanel">
-        <span class="moodsText"><span class="value">{{moods.length}}</span> Mixs</span>
+        <span class="moodsText"><span class="value">{{mixes.length}}</span> Mixs</span>
         <ul class="moodUl">
           <li class="moodLi" v-for="mood in moods">
             <img v-bind:src="mood.image">
@@ -63,7 +72,11 @@
     </div>
 
     <div class="col-9" id="middleContent">
-    {{currentTrack}}
+    <!-- {{provider}} -->
+    <!-- {{currentTrack}} -->
+    <!-- {{mixes | json}} -->
+    <!-- {{caca}} -->
+    <!-- {{checkedTracks | json}} -->
       <div class="col-12" style="margin-left: 2%">
         <span class="middleUl">
           <span v-for="p in playlists">
@@ -71,9 +84,9 @@
               <span v-for="track in p.Tracks">
                 <span class="tracks">
                   <div class="trackWrapper">
-                    <img class="checked" v-bind:src="track.Cover">
+                    <img class="checked" v-bind:src="p.Cover">
                     <div class="trackOverlay">
-                      <img src="../assets/play.png" v-on:click="play(track.TrackId)">
+                      <img src="../assets/play.png" v-on:click="play(track.TrackId, track.RowKey)">
                     </div>
                   </div>
                   <div class="trackFooter">
@@ -84,6 +97,30 @@
             </span>
           </span>
         </span>
+        <div class="col-8" id="bottomContent">
+          <div class="col-12">
+            
+          </div>
+
+          <div class="col-6" id="players">
+            <span v-if="provider === 'd'">
+              <iframe class="deezerPlaayer" scrolling="no" frameborder="0" allowTransparency="true" src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=false&width=700&height=350&color=007FEB&layout=dark&size=medium&type=playlist&id=30595446&app_id=1" width="700" height="350"></iframe>
+            </span>
+            <span v-else>
+              <iframe src="" name="myFrame" style="visibility: hidden"></iframe>
+              <iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+            </span>
+          </div>
+
+          <div class="col-6" id="criterias">
+            <div class="criterias" v-for="criteria in criterias">
+              <input class="range" type="range" v-model="criteria.value" min="0" max="100">
+              <label>{{criteria.label}}</label>
+              <span>{{criteria.value}}</span>
+            </div>
+            <button v-on:click="createMix" name="btn" > test</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -94,14 +131,20 @@
 <script>
  export default {
    data () {
-     this.loadPlaylists()
-     this.loadEvents()
      return {
        currentTrack: '',
        currentMood: '',
        playlists: [],
+       tracks: [],
        events: [],
+       groups: [],
+       mixValue: [],
+       mixes: [],
+       test: [],
        checkedPlaylists: [],
+       checkedTracks: [],
+       provider: '',
+       caca: '',
        moods: [
       { label: 'Soirée', image: 'http://image.noelshack.com/fichiers/2016/23/1465756669-party.png' },
       { label: 'Chill', image: 'http://image.noelshack.com/fichiers/2016/24/1465931485-moodchill.png' },
@@ -121,38 +164,66 @@
    },
    methods: {
      loadPlaylists: function () {
-       this.$http.get('https://api.myjson.com/bins/33e43', function (data, status, request) {
-         if (status === 200) {
-           this.playlists = data.map(p => { p.check = false; return p })
-         }
+       this.$http.get('http://omega.itinet.fr/Facebook/group/' + this.caca + '/playlistsGroup', function (data, status, request) {
+         this.playlists = data.map(p => { p.check = false; return p })
        })
      },
      loadEvents: function () {
-       this.$http.get('https://api.myjson.com/bins/1kbou', function (data, status, request) {
-         if (status === 200) {
-           this.events = data
-         }
+       this.$http.get('http://omega.itinet.fr/Facebook/events', function (data, status, request) {
+         this.events = data
+       })
+     },
+     loadGroups: function () {
+       this.$http.get('http://omega.itinet.fr/Facebook/groups', function (data, status, request) {
+         this.groups = data
+       })
+     },
+     createMix: function () {
+       var datatest = this.criterias
+       var mixedTracks
+       var datajson = {}
+       for (var i in datatest) {
+         var a = datatest[i]
+         datajson[a.label] = a.value
+       }
+       this.$http.post('/api/reset_waitlist_v2', datajson, function (data) {
+       })
+       this.$http.post('/api/reset_waitlist_v2', this.checkedTracks, function (data) {
+         mixedTracks = data
+       })
+       this.mixes.push(mixedTracks)
+       this.mixes.push(datajson)
+       this.$http.post('/api/reset_waitlist_v2', this.mixes, function (data) {
        })
      },
      selectPlaylist: function (id) {
        id.check = !id.check
-       // var index = this.checkedPlaylists.indexOf(id, 0)
+       if (id.check === false) {
+         this.checkedTracks.splice(id, 1)
+       } else {
+         this.checkedTracks.push(id.Tracks)
+       }
+       // var index = this.checkedTracks.indexOf(id, 0)
        // if (index === -1) {
        //   this.checkedPlaylists.push(id)
-       //   document.getElementById(id).style.border = '2px solid green'
-       //   document.getElementById(id).style.WebkitFilter = 'grayscale(100%)'
        // } else {
        //   this.checkedPlaylists.splice(index, 1)
-       //   document.getElementById(id).style.WebkitFilter = 'grayscale(0)'
-       //   document.getElementById(id).style.border = '0px solid green'
        // }
      },
      selectMood: function (id) {
        this.currentMood = id
      },
-     play: function (id) {
+     play: function (id, RowKey) {
        this.currentTrack = id
+       this.provider = RowKey.charAt(0)
      }
+   },
+   ready: function () {
+     var currentEventOrGroup = this.$route.params.id
+     this.$set('caca', currentEventOrGroup)
+     this.loadPlaylists()
+     this.loadEvents()
+     this.loadGroups()
    }
 }
 </script>
@@ -170,6 +241,12 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+#criterias {
+  font-size: 8px;
+  position: relative;
+  margin-left: 52%;
 }
 
 .row::after {
@@ -206,6 +283,27 @@ body {
   float: left;
   background: white; 
   padding: 2%;
+}
+
+#bottomContent {
+  bottom: 10px;
+  position: absolute;
+  padding: 0px;
+}
+
+#bottomContent div {
+  float: left;
+}
+
+#players {
+  bottom: 0px;
+  position: absolute;
+}
+
+.range {
+  width: 10px;
+  height: 100px;writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
 }
 
 .eventPanel {
@@ -343,6 +441,7 @@ body {
 }
 
 .middleUl {
+  height: 50%;
 }
 
 .trackFooter {

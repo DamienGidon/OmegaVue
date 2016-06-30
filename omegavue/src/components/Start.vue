@@ -45,9 +45,6 @@
 <script>
 export default {
   data () {
-    this.loadEvents()
-    this.loadGroups()
-    this.loadPlaylists()
     return {
       events: [],
       groups: [],
@@ -56,26 +53,25 @@ export default {
   },
   methods: {
     loadEvents: function () {
-      this.$http.get('https://api.myjson.com/bins/3a8sc', function (data, status, request) {
-        if (status === 200) {
-          this.events = data
-        }
+      this.$http.get('http://omega.itinet.fr/Facebook/events', function (data, status, request) {
+        this.events = data
       })
     },
     loadGroups: function () {
-      this.$http.get('https://api.myjson.com/bins/qn6r', function (data, status, request) {
-        if (status === 200) {
-          this.groups = data
-        }
+      this.$http.get('http://omega.itinet.fr/Facebook/groups', function (data, status, request) {
+        this.groups = data
       })
     },
     loadPlaylists: function () {
-      this.$http.get('https://api.myjson.com/bins/3bjxk', function (data, status, request) {
-        if (status === 200) {
-          this.playlists = data
-        }
+      this.$http.get('http://omega.itinet.fr/Facebook/group/' + this.caca + '/playlistsGroup', function (data, status, request) {
+        this.playlists = data
       })
     }
+  },
+  ready: function () {
+    this.loadPlaylists()
+    this.loadEvents()
+    this.loadGroups()
   }
 }
 
@@ -113,6 +109,8 @@ position: relative;
   padding-top: 2%;
   background-color: #F8F8F8;
   position: absolute;
+  height: 100%;
+  width: 100%;
 }
 [id^=switch],
 [id^=switch] + *{
